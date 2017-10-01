@@ -16,8 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-//@Aspect
-//@Component
+@Aspect
+@Component
 public class CounterAspect {
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();

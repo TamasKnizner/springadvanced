@@ -1,4 +1,4 @@
-package com.epam.tamasknizner.springadvancedtraining.repository.mapBased;
+package com.epam.tamasknizner.springadvancedtraining.repository.mapbased;
 
 import com.epam.tamasknizner.springadvancedtraining.domain.DomainObject;
 import com.epam.tamasknizner.springadvancedtraining.repository.DomainObjectRepository;
@@ -6,9 +6,7 @@ import com.epam.tamasknizner.springadvancedtraining.repository.DomainObjectRepos
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class MapBasedIdentityRepository<TEntity extends DomainObject>
-        extends MapBasedRepository<TEntity, Long>
-        implements DomainObjectRepository<TEntity> {
+public abstract class MapBasedIdentityRepository<TEntity extends DomainObject> extends MapBasedRepository<TEntity, Long> implements DomainObjectRepository<TEntity> {
 
     private final AtomicLong maxId = new AtomicLong();
 
@@ -23,10 +21,6 @@ public abstract class MapBasedIdentityRepository<TEntity extends DomainObject>
             add(id == null ? maxId.getAndIncrement() : id, entity);
         }
     }
-
-//    protected MapBasedIdentityRepository(ObjectLoader<Collection<TEntity>> loader) {
-//        this(loader.load());
-//    }
 
     @Override
     public TEntity add(TEntity entity) {

@@ -8,10 +8,5 @@ import javax.annotation.Nullable;
 import java.time.LocalDateTime;
 
 public interface DiscountStrategy {
-    float getDiscount(
-            @Nullable User user,
-            @Nonnull Event event,
-            @Nonnull LocalDateTime airDateTime,
-            int numberOfTickets,
-            int ticketNumberInOrder);
+    float getDiscount(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime airDateTime, int numberOfTickets, int ticketNumberInOrder);
 }

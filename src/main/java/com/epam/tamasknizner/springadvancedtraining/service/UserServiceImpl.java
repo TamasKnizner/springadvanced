@@ -12,13 +12,19 @@ import javax.annotation.Nullable;
 public class UserServiceImpl extends RepositoryBasedDomainObjectService<User> implements UserService {
 
     @Autowired
-    public UserServiceImpl(DomainObjectRepository<User> repository) {
-        super(repository);
+    public UserServiceImpl(DomainObjectRepository<User> userRepository) {
+        super(userRepository);
     }
 
     @Nullable
     @Override
     public User getUserByEmail(@Nonnull String email) {
         return repository.findSingleOrDefault(u -> email.equalsIgnoreCase(u.getEmail()));
+    }
+
+    @Nullable
+    @Override
+    public User getUserById(@Nonnull Long id) {
+        return repository.findById(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.epam.tamasknizner.springadvancedtraining.repository.mapBased;
+package com.epam.tamasknizner.springadvancedtraining.repository.mapbased;
 
 import com.epam.tamasknizner.springadvancedtraining.domain.Ticket;
 import com.epam.tamasknizner.springadvancedtraining.repository.TicketRepository;

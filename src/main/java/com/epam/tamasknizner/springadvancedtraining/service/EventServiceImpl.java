@@ -19,7 +19,7 @@ public class EventServiceImpl extends RepositoryBasedDomainObjectService<Event> 
     /**
      * A clock reference that could be easily injected for testing purposes.
      */
-    private Clock clock;
+    private Clock clock = Clock.systemUTC();
 
     @Autowired
     public EventServiceImpl(EventRepository repository) {
@@ -58,8 +58,4 @@ public class EventServiceImpl extends RepositoryBasedDomainObjectService<Event> 
         return clock;
     }
 
-    @Autowired
-    public void setClock(Clock clock) {
-        this.clock = clock;
-    }
 }

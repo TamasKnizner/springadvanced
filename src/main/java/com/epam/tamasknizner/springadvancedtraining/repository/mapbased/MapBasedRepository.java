@@ -1,4 +1,4 @@
-package com.epam.tamasknizner.springadvancedtraining.repository.mapBased;
+package com.epam.tamasknizner.springadvancedtraining.repository.mapbased;
 
 import com.epam.tamasknizner.springadvancedtraining.repository.Repository;
 
@@ -18,33 +18,17 @@ public abstract class MapBasedRepository<TEntity, TKey> implements Repository<TE
     private final BiConsumer<TEntity, TKey> idSetter;
     protected final ConcurrentHashMap<TKey, TEntity> entitiesMap = new ConcurrentHashMap<>();
 
-    protected MapBasedRepository(
-            @Nonnull Function<TEntity, TKey> idGetter,
-            @Nonnull BiConsumer<TEntity, TKey> idSetter
-    ) {
+    protected MapBasedRepository(@Nonnull Function<TEntity, TKey> idGetter, @Nonnull BiConsumer<TEntity, TKey> idSetter) {
         this.idGetter = idGetter;
         this.idSetter = idSetter;
     }
 
-    protected MapBasedRepository(
-            @Nonnull Function<TEntity, TKey> idGetter,
-            @Nonnull BiConsumer<TEntity, TKey> idSetter,
-            @Nonnull Collection<TEntity> entities
-    ) {
+    protected MapBasedRepository(@Nonnull Function<TEntity, TKey> idGetter, @Nonnull BiConsumer<TEntity, TKey> idSetter, @Nonnull Collection<TEntity> entities) {
         this(idGetter, idSetter);
-
         for (TEntity entity : entities) {
             add(idGetter.apply(entity), entity);
         }
     }
-
-//    protected MapBasedRepository(
-//            @Nonnull Function<TEntity, TKey> idGetter,
-//            @Nonnull BiConsumer<TEntity, TKey> idSetter,
-//            @Nonnull ObjectLoader<Collection<TEntity>> loader
-//    ) {
-//        this(idGetter, idSetter, loader.load());
-//    }
 
     @Override
     public TEntity add(TEntity entity) {

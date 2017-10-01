@@ -6,8 +6,7 @@ import com.epam.tamasknizner.springadvancedtraining.repository.DomainObjectRepos
 import javax.annotation.Nonnull;
 import java.util.Collection;
 
-public abstract class RepositoryBasedDomainObjectService<TEntity extends DomainObject>
-        implements AbstractDomainObjectService<TEntity> {
+public abstract class RepositoryBasedDomainObjectService<TEntity extends DomainObject> implements AbstractDomainObjectService<TEntity> {
 
     protected final DomainObjectRepository<TEntity> repository;
 

@@ -19,4 +19,12 @@ public interface UserService extends AbstractDomainObjectService<User> {
      */
     @Nullable User getUserByEmail(@Nonnull String email);
 
+    /**
+     * Finding user by id
+     *
+     * @param id
+     *          Id of the user
+     * @return found user or <code>null</code>
+     */
+    @Nullable User getUserById(@Nonnull Long id);
 }

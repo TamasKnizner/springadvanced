@@ -25,12 +25,7 @@ public interface DiscountService {
      * @param seats       An ordered set of seats that the user wants to purchase.
      * @return Discounts for every seat. If a purchased seat does not deserve a discount, it is not present on the map.
      */
-    Map<Long, ApplicableDiscountInfo> getDiscount(
-            @Nullable User user,
-            @Nonnull Event event,
-            @Nonnull LocalDateTime airDateTime,
-            LinkedHashSet<Long> seats
-    );
+    Map<Long, ApplicableDiscountInfo> getDiscount(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime airDateTime, LinkedHashSet<Long> seats);
 
     class ApplicableDiscountInfo {
         private final DiscountStrategy discountStrategy;

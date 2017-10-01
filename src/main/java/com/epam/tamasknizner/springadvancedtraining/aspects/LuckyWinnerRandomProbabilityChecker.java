@@ -9,7 +9,7 @@ public class LuckyWinnerRandomProbabilityChecker implements LuckyWinnerProbabili
 
     private final float probability;
 
-    public LuckyWinnerRandomProbabilityChecker(float probability) {
+    LuckyWinnerRandomProbabilityChecker(float probability) {
         if (probability < 0 || probability > 1) {
             throw new IllegalArgumentException("probability");
         }

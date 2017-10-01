@@ -15,24 +15,14 @@ public class NthTicketDiscountStrategy extends AbstractDiscountStrategy implemen
     private final float discountPercent;
     private final TicketRepository ticketRepository;
 
-    public NthTicketDiscountStrategy(
-            int n,
-            float discountPercent,
-            @Nonnull TicketRepository ticketRepository
-    ) {
+    public NthTicketDiscountStrategy(int n, float discountPercent, @Nonnull TicketRepository ticketRepository) {
         this.n = n;
         this.discountPercent = discountPercent;
         this.ticketRepository = ticketRepository;
     }
 
     @Override
-    public float getDiscount(
-            @Nullable User user,
-            @Nonnull Event event,
-            @Nonnull LocalDateTime airDateTime,
-            int numberOfTickets,
-            int ticketNumberInOrder
-    ) {
+    public float getDiscount(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime airDateTime, int numberOfTickets, int ticketNumberInOrder) {
         int totalTicketNumber = ticketNumberInOrder;
         if (user != null) {
             totalTicketNumber += getPurchasedTicketsCountByUser(user);

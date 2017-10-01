@@ -3,6 +3,7 @@ package com.epam.tamasknizner.springadvancedtraining.aspects;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.epam.tamasknizner.springadvancedtraining.domain.Event;
 import com.epam.tamasknizner.springadvancedtraining.domain.User;
@@ -11,20 +12,17 @@ import com.epam.tamasknizner.springadvancedtraining.service.UserService;
 
 import java.time.LocalDateTime;
 
-//@Aspect
-//@Component
+@Aspect
+@Component
 public class LuckyWinnerAspect {
 
-    //private final LuckyWinnerProbabilityChecker probabilityChecker;
-
+    private final LuckyWinnerProbabilityChecker probabilityChecker;
     private final UserService userService;
 
-    public LuckyWinnerAspect(
-            //LuckyWinnerProbabilityChecker probabilityChecker,
-            UserService userService
-    ) {
-        //this.probabilityChecker = probabilityChecker;
+    @Autowired
+    public LuckyWinnerAspect(UserService userService) {
         this.userService = userService;
+        this.probabilityChecker = new LuckyWinnerRandomProbabilityChecker(0.8f);
     }
 
     @Around("execution(* com.epam.tamasknizner.springadvancedtraining.service.BookingService.getTicketsPrice(..))")
@@ -32,7 +30,7 @@ public class LuckyWinnerAspect {
         Object[] args = joinPoint.getArgs();
         User user = (User) args[2];
 
-        if (user == null /*|| !probabilityChecker.isTrue()*/) {
+        if (user == null || !probabilityChecker.isTrue()) {
             return joinPoint.proceed();
         }
 

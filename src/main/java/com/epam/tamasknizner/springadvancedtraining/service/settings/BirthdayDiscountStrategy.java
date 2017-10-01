@@ -25,12 +25,7 @@ public class BirthdayDiscountStrategy extends AbstractDiscountStrategy implement
     }
 
     @Override
-    public float getDiscount(
-            @Nullable User user,
-            @Nonnull Event event,
-            @Nonnull LocalDateTime airDateTime,
-            int numberOfTickets,
-            int ticketNumberInOrder) {
+    public float getDiscount(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime airDateTime, int numberOfTickets, int ticketNumberInOrder) {
 
         if (user == null || user.getBirthday() == null) {
             return 0;
@@ -39,8 +34,7 @@ public class BirthdayDiscountStrategy extends AbstractDiscountStrategy implement
         LocalDate upperBound = airDateTime.plusDays(daysDeviation + 1).toLocalDate();
         LocalDate lowerBound = airDateTime.plusDays(-daysDeviation).toLocalDate();
 
-        LocalDate birthday = LocalDate.of(airDateTime.getYear(),
-                user.getBirthday().getMonth(), user.getBirthday().getDayOfMonth());
+        LocalDate birthday = LocalDate.of(airDateTime.getYear(),user.getBirthday().getMonth(), user.getBirthday().getDayOfMonth());
 
         return birthday.isBefore(upperBound) &&
                 (birthday.isAfter(lowerBound) || birthday.isEqual(lowerBound))

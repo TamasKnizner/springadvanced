@@ -25,12 +25,7 @@ public class BookingServiceImpl implements BookingService {
     private final Object bookingLocker = new Object();
 
     @Autowired
-    public BookingServiceImpl(
-            BookingSettings bookingSettings,
-            TicketRepository ticketRepository,
-            UserRepository userRepository,
-            DiscountService discountService
-    ) {
+    public BookingServiceImpl(BookingSettings bookingSettings, TicketRepository ticketRepository, UserRepository userRepository, DiscountService discountService) {
         this.bookingSettings = bookingSettings;
         this.ticketRepository = ticketRepository;
         this.userRepository = userRepository;
@@ -38,12 +33,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public double getTicketsPrice(
-            @Nonnull Event event,
-            @Nonnull LocalDateTime dateTime,
-            @Nullable User user,
-            @Nonnull LinkedHashSet<Long> seats
-    ) {
+    public double getTicketsPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user, @Nonnull LinkedHashSet<Long> seats) {
         double sum = 0.0;
         double basePrice = event.getBasePrice();
         if (event.getRating() == EventRating.HIGH) {

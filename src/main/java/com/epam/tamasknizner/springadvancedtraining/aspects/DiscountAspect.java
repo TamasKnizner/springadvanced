@@ -3,6 +3,7 @@ package com.epam.tamasknizner.springadvancedtraining.aspects;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.epam.tamasknizner.springadvancedtraining.domain.DiscountCounter;
 import com.epam.tamasknizner.springadvancedtraining.domain.User;
@@ -20,23 +21,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-//@Aspect
-//@Component
+@Aspect
+@Component
 public class DiscountAspect {
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     private final ConcurrentHashMap<DiscountStrategy, Integer> total = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<DiscountUserKey, Integer> perUser = new ConcurrentHashMap<>();
 
+    @Autowired
     private DiscountCounterRepository discountCounterRepository;
 
-    @AfterReturning(
-            value = "execution(* com.epam.tamasknizner.springadvancedtraining.service.DiscountService.getDiscount(..))",
-            returning = "returnValue")
-    public void handleGetDiscount(
-            JoinPoint joinPoint,
-            Map<Long, DiscountService.ApplicableDiscountInfo> returnValue
-    ) {
+    @AfterReturning(value = "execution(* com.epam.tamasknizner.springadvancedtraining.service.DiscountService.getDiscount(..))", returning = "returnValue")
+    public void handleGetDiscount(JoinPoint joinPoint, Map<Long, DiscountService.ApplicableDiscountInfo> returnValue) {
         List<AbstractDiscountStrategy> appliedStrategies = returnValue.values().stream()
                 .filter(i -> i.getDiscountPercent() > 0.0f)
                 .map(DiscountService.ApplicableDiscountInfo::getDiscountStrategy)
