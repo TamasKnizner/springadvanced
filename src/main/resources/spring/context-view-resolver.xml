@@ -19,4 +19,6 @@
 
     <bean class="org.springframework.web.servlet.view.XmlViewResolver" />
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+
 </beans>

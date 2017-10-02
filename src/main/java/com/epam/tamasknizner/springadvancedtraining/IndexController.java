@@ -1,5 +1,6 @@
 package com.epam.tamasknizner.springadvancedtraining;
 
+import com.epam.tamasknizner.springadvancedtraining.service.EventService;
 import com.epam.tamasknizner.springadvancedtraining.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,20 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EventService eventService;
+
     @RequestMapping("/")
     public String index(final Model model) {
         model.addAttribute("user", userService.getById(1L));
         return "index";
+    }
+
+    @RequestMapping("/vardump")
+    public String vardump(final Model model) {
+        model.addAttribute("users", userService.getAll());
+        model.addAttribute("events", eventService.getAll());
+        return "vardump";
     }
 
 }

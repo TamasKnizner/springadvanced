@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Bad event",
+    "basePrice": 10000.0,
+    "rating": "LOW"
+  },
+  {
+    "name": "Mid event 1",
+    "basePrice": 10000.0,
+    "rating": "MID"
+  }
+]

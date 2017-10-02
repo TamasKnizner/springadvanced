@@ -61,7 +61,7 @@
     </bean>
 
     <bean id="bonJoviConcert" class="com.epam.tamasknizner.springadvancedtraining.domain.Event">
-        <property name="id" value="1" />
+        <property name="id" value="40" />
         <property name="name" value="Bon Jovi Concert" />
         <property name="basePrice" value="5000" />
         <property name="rating" value="HIGH" />
@@ -73,7 +73,7 @@
     </bean>
 
     <bean id="johnDoe" class="com.epam.tamasknizner.springadvancedtraining.domain.User">
-        <property name="id" value="1"/>
+        <property name="id" value="50"/>
         <property name="firstName" value="John" />
         <property name="lastName" value="Doe" />
         <property name="email" value="john_doe@mail.com" />
@@ -86,7 +86,7 @@
         </property>
     </bean>
     <bean id="steveSmith" class="com.epam.tamasknizner.springadvancedtraining.domain.User">
-        <property name="id" value="2"/>
+        <property name="id" value="51"/>
         <property name="firstName" value="Steve" />
         <property name="lastName" value="Smith" />
         <property name="email" value="steve_smith@mail.com" />
@@ -99,7 +99,7 @@
         </property>
     </bean>
     <bean id="anaJohnson" class="com.epam.tamasknizner.springadvancedtraining.domain.User">
-        <property name="id" value="3"/>
+        <property name="id" value="52"/>
         <property name="firstName" value="Ana" />
         <property name="lastName" value="Johnson" />
         <property name="email" value="ana_johnson@mail.com" />
@@ -116,19 +116,19 @@
         <constructor-arg name="user" ref="johnDoe" />
         <constructor-arg name="event" ref="bonJoviConcert" />
         <constructor-arg name="dateTime" ref="bonJoviConcertDate" />
-        <constructor-arg name="seat" value="1"/>
+        <constructor-arg name="seat" value="66"/>
     </bean>
     <bean id="steveTicket" class="com.epam.tamasknizner.springadvancedtraining.domain.Ticket">
         <constructor-arg name="user" ref="steveSmith" />
         <constructor-arg name="event" ref="bonJoviConcert" />
         <constructor-arg name="dateTime" ref="bonJoviConcertDate" />
-        <constructor-arg name="seat" value="2"/>
+        <constructor-arg name="seat" value="67"/>
     </bean>
     <bean id="anaTicket" class="com.epam.tamasknizner.springadvancedtraining.domain.Ticket">
         <constructor-arg name="user" ref="anaJohnson" />
         <constructor-arg name="event" ref="bonJoviConcert" />
         <constructor-arg name="dateTime" ref="bonJoviConcertDate" />
-        <constructor-arg name="seat" value="3"/>
+        <constructor-arg name="seat" value="68"/>
     </bean>
 
 

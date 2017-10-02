@@ -1,5 +1,8 @@
 package com.epam.tamasknizner.springadvancedtraining.domain;
 
+import com.epam.tamasknizner.springadvancedtraining.domain.request.deserializer.LocalDateDeserializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -20,9 +23,10 @@ public class User extends DomainObject {
     private String lastName;
 
     private String email;
-
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate birthday;
 
+    @JsonIgnore
     private Set<Ticket> tickets = new HashSet<>();
 
     public final Set<UserLuckyEventInfo> getLuckyEvents() {

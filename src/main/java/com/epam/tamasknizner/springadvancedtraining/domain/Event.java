@@ -1,5 +1,9 @@
 package com.epam.tamasknizner.springadvancedtraining.domain;
 
+import com.epam.tamasknizner.springadvancedtraining.domain.request.deserializer.EventRatingDeserializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -17,9 +21,10 @@ public class Event extends DomainObject {
     private String name;
 
     private double basePrice;
-
+    @JsonDeserialize(using = EventRatingDeserializer.class)
     private EventRating rating;
 
+    @JsonIgnore
     private Map<LocalDateTime, Auditorium> auditoriums = new HashMap<>();
 
     /**

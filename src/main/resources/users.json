@@ -1,0 +1,14 @@
+[
+  {
+    "firstName": "FirstName",
+    "lastName": "LastName",
+    "email": "person@mail.com",
+    "birthday": "2002-12-01"
+  },
+  {
+    "firstName": "Test",
+    "lastName": "user",
+    "email": "testuser@mail.com",
+    "birthday": "1995-11-02"
+  }
+]
