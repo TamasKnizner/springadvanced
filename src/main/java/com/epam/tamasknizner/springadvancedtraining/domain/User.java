@@ -4,10 +4,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * @author Yuriy_Tkach
@@ -25,7 +23,7 @@ public class User extends DomainObject {
 
     private LocalDate birthday;
 
-    private NavigableSet<Ticket> tickets = new TreeSet<>();
+    private Set<Ticket> tickets = new HashSet<>();
 
     public final Set<UserLuckyEventInfo> getLuckyEvents() {
         synchronized (luckyEventsLocker) {
@@ -72,11 +70,11 @@ public class User extends DomainObject {
         this.birthday = birthday;
     }
 
-    public NavigableSet<Ticket> getTickets() {
+    public Set<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(NavigableSet<Ticket> tickets) {
+    public void setTickets(Set<Ticket> tickets) {
         this.tickets = tickets;
     }
 

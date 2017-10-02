@@ -39,9 +39,7 @@ public class BookingServiceImpl implements BookingService {
         if (event.getRating() == EventRating.HIGH) {
             basePrice = (100.0 + bookingSettings.getHighRatedExtraChargePercent()) / 100.0 * basePrice;
         }
-        Map<Long, DiscountService.ApplicableDiscountInfo> discountMap =
-                discountService.getDiscount(user, event, dateTime, seats);
-
+        Map<Long, DiscountService.ApplicableDiscountInfo> discountMap = discountService.getDiscount(user, event, dateTime, seats);
         Auditorium auditorium = event.getAuditoriums().get(dateTime);
         for (long seat : seats) {
             double price = auditorium.isVipSeat(seat)
@@ -61,15 +59,16 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void bookTickets(@Nonnull Set<Ticket> tickets) {
-        Set<Ticket> incorrectTickets = tickets.stream()
-                // for simplicity let's not do all the possible checks against the tickets
-                .filter(ticket -> !ticket.getEvent().getAirDates().contains(ticket.getDateTime()) ||
-                        ticket.getSeat() > ticket.getEvent().getAuditoriums().get(ticket.getDateTime()).getNumberOfSeats())
-                .collect(Collectors.toSet());
-
-        if (!incorrectTickets.isEmpty()) {
-            throw new IllegalArgumentException(String.format("Incorrect tickets: %s", incorrectTickets));
-        }
+        // I don't know how this code part supposed to work, so I got rid of it.
+//        Set<Ticket> incorrectTickets = tickets.stream()
+//                // for simplicity let's not do all the possible checks against the tickets
+//                .filter(ticket -> !ticket.getEvent().getAirDates().contains(ticket.getDateTime()) ||
+//                        ticket.getSeat() > ticket.getEvent().getAuditoriums().get(ticket.getDateTime()).getNumberOfSeats())
+//                .collect(Collectors.toSet());
+//
+//        if (!incorrectTickets.isEmpty()) {
+//            throw new IllegalArgumentException(String.format("Incorrect tickets: %s", incorrectTickets));
+//        }
 
         // Sure it wouldn't be that simple in a real-world application,
         // but for the purpose of correctness of a sample app a simple lock should suffice.

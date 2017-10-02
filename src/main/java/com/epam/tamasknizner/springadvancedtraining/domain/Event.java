@@ -2,10 +2,11 @@ package com.epam.tamasknizner.springadvancedtraining.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -19,7 +20,7 @@ public class Event extends DomainObject {
 
     private EventRating rating;
 
-    private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
+    private Map<LocalDateTime, Auditorium> auditoriums = new HashMap<>();
 
     /**
      * Checks if event is aired on particular <code>dateTime</code> and assigns
@@ -130,7 +131,7 @@ public class Event extends DomainObject {
         this.name = name;
     }
 
-    public NavigableSet<LocalDateTime> getAirDates() {
+    public TreeSet<LocalDateTime> getAirDates() {
         return new TreeSet<>(auditoriums.keySet());
     }
 
@@ -150,11 +151,11 @@ public class Event extends DomainObject {
         this.rating = rating;
     }
 
-    public NavigableMap<LocalDateTime, Auditorium> getAuditoriums() {
+    public Map<LocalDateTime, Auditorium> getAuditoriums() {
         return auditoriums;
     }
 
-    public void setAuditoriums(NavigableMap<LocalDateTime, Auditorium> auditoriums) {
+    public void setAuditoriums(Map<LocalDateTime, Auditorium> auditoriums) {
         this.auditoriums = auditoriums;
     }
 

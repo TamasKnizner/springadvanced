@@ -8,45 +8,9 @@
     <bean id="userRepository" class="com.epam.tamasknizner.springadvancedtraining.repository.mapbased.UserRepositoryImpl">
         <constructor-arg>
             <util:list list-class="java.util.ArrayList" value-type="com.epam.tamasknizner.springadvancedtraining.domain.User">
-                <bean class="com.epam.tamasknizner.springadvancedtraining.domain.User">
-                    <property name="id" value="1"/>
-                    <property name="firstName" value="John" />
-                    <property name="lastName" value="Doe" />
-                    <property name="email" value="john_doe@mail.com" />
-                    <property name="birthday">
-                        <bean class="java.time.LocalDate">
-                            <constructor-arg name="year" value="1970" />
-                            <constructor-arg name="month" value="1" />
-                            <constructor-arg name="dayOfMonth" value="5" />
-                        </bean>
-                    </property>
-                </bean>
-                <bean class="com.epam.tamasknizner.springadvancedtraining.domain.User">
-                    <property name="id" value="2"/>
-                    <property name="firstName" value="Steve" />
-                    <property name="lastName" value="Smith" />
-                    <property name="email" value="steve_smith@mail.com" />
-                    <property name="birthday">
-                        <bean class="java.time.LocalDate">
-                            <constructor-arg name="year" value="1982" />
-                            <constructor-arg name="month" value="5" />
-                            <constructor-arg name="dayOfMonth" value="2" />
-                        </bean>
-                    </property>
-                </bean>
-                <bean class="com.epam.tamasknizner.springadvancedtraining.domain.User">
-                    <property name="id" value="3"/>
-                    <property name="firstName" value="Ana" />
-                    <property name="lastName" value="Johnson" />
-                    <property name="email" value="ana_johnson@mail.com" />
-                    <property name="birthday">
-                        <bean class="java.time.LocalDate">
-                            <constructor-arg name="year" value="1973" />
-                            <constructor-arg name="month" value="11" />
-                            <constructor-arg name="dayOfMonth" value="12" />
-                        </bean>
-                    </property>
-                </bean>
+                <ref bean="johnDoe" />
+                <ref bean="steveSmith" />
+                <ref bean="anaJohnson" />
             </util:list>
         </constructor-arg>
     </bean>
@@ -54,27 +18,7 @@
     <bean id="eventRepository" class="com.epam.tamasknizner.springadvancedtraining.repository.mapbased.EventRepositoryImpl">
         <constructor-arg>
             <util:list list-class="java.util.ArrayList" value-type="com.epam.tamasknizner.springadvancedtraining.domain.Event">
-                <bean class="com.epam.tamasknizner.springadvancedtraining.domain.Event">
-                    <property name="id" value="1" />
-                    <property name="name" value="Bon Jovi Concert" />
-                    <property name="basePrice" value="5000" />
-                    <property name="rating" value="HIGH" />
-                    <property name="auditoriums">
-                        <util:map map-class="java.util.TreeMap">
-                            <entry value-ref="wembleyStadium">
-                                <key>
-                                    <bean class="java.time.LocalDateTime" factory-method="of">
-                                        <constructor-arg name="year" value="1995" />
-                                        <constructor-arg name="month" value="JULY" />
-                                        <constructor-arg name="dayOfMonth" value="5" />
-                                        <constructor-arg name="hour" value="20" />
-                                        <constructor-arg name="minute" value="0" />
-                                    </bean>
-                                </key>
-                            </entry>
-                        </util:map>
-                    </property>
-                </bean>
+                <ref bean="bonJoviConcert" />
             </util:list>
         </constructor-arg>
     </bean>
@@ -88,6 +32,16 @@
         </constructor-arg>
     </bean>
 
+    <bean id="ticketRepository" class="com.epam.tamasknizner.springadvancedtraining.repository.mapbased.TicketRepositoryImpl">
+        <constructor-arg>
+            <util:list list-class="java.util.ArrayList" value-type="com.epam.tamasknizner.springadvancedtraining.domain.Ticket">
+                <ref bean="johnTicket" />
+                <ref bean="steveTicket" />
+                <ref bean="anaTicket" />
+            </util:list>
+        </constructor-arg>
+    </bean>
+
     <bean id="wembleyStadium" class="com.epam.tamasknizner.springadvancedtraining.domain.Auditorium">
         <property name="name" value="Wembley Stadium" />
         <property name="numberOfSeats" value="15000" />
@@ -97,5 +51,85 @@
         <property name="name" value="Sydney Opera House" />
         <property name="numberOfSeats" value="5738" />
     </bean>
+
+    <bean id="bonJoviConcertDate" class="java.time.LocalDateTime" factory-method="of">
+        <constructor-arg name="year" value="1995" />
+        <constructor-arg name="month" value="JUNE" />
+        <constructor-arg name="dayOfMonth" value="25" />
+        <constructor-arg name="hour" value="20" />
+        <constructor-arg name="minute" value="0" />
+    </bean>
+
+    <bean id="bonJoviConcert" class="com.epam.tamasknizner.springadvancedtraining.domain.Event">
+        <property name="id" value="1" />
+        <property name="name" value="Bon Jovi Concert" />
+        <property name="basePrice" value="5000" />
+        <property name="rating" value="HIGH" />
+        <property name="auditoriums">
+            <util:map map-class="java.util.TreeMap">
+                <entry value-ref="wembleyStadium" key-ref="bonJoviConcertDate" />
+            </util:map>
+        </property>
+    </bean>
+
+    <bean id="johnDoe" class="com.epam.tamasknizner.springadvancedtraining.domain.User">
+        <property name="id" value="1"/>
+        <property name="firstName" value="John" />
+        <property name="lastName" value="Doe" />
+        <property name="email" value="john_doe@mail.com" />
+        <property name="birthday">
+            <bean class="java.time.LocalDate">
+                <constructor-arg name="year" value="1970" />
+                <constructor-arg name="month" value="1" />
+                <constructor-arg name="dayOfMonth" value="5" />
+            </bean>
+        </property>
+    </bean>
+    <bean id="steveSmith" class="com.epam.tamasknizner.springadvancedtraining.domain.User">
+        <property name="id" value="2"/>
+        <property name="firstName" value="Steve" />
+        <property name="lastName" value="Smith" />
+        <property name="email" value="steve_smith@mail.com" />
+        <property name="birthday">
+            <bean class="java.time.LocalDate">
+                <constructor-arg name="year" value="1982" />
+                <constructor-arg name="month" value="5" />
+                <constructor-arg name="dayOfMonth" value="2" />
+            </bean>
+        </property>
+    </bean>
+    <bean id="anaJohnson" class="com.epam.tamasknizner.springadvancedtraining.domain.User">
+        <property name="id" value="3"/>
+        <property name="firstName" value="Ana" />
+        <property name="lastName" value="Johnson" />
+        <property name="email" value="ana_johnson@mail.com" />
+        <property name="birthday">
+            <bean class="java.time.LocalDate">
+                <constructor-arg name="year" value="1973" />
+                <constructor-arg name="month" value="11" />
+                <constructor-arg name="dayOfMonth" value="12" />
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="johnTicket" class="com.epam.tamasknizner.springadvancedtraining.domain.Ticket">
+        <constructor-arg name="user" ref="johnDoe" />
+        <constructor-arg name="event" ref="bonJoviConcert" />
+        <constructor-arg name="dateTime" ref="bonJoviConcertDate" />
+        <constructor-arg name="seat" value="1"/>
+    </bean>
+    <bean id="steveTicket" class="com.epam.tamasknizner.springadvancedtraining.domain.Ticket">
+        <constructor-arg name="user" ref="steveSmith" />
+        <constructor-arg name="event" ref="bonJoviConcert" />
+        <constructor-arg name="dateTime" ref="bonJoviConcertDate" />
+        <constructor-arg name="seat" value="2"/>
+    </bean>
+    <bean id="anaTicket" class="com.epam.tamasknizner.springadvancedtraining.domain.Ticket">
+        <constructor-arg name="user" ref="anaJohnson" />
+        <constructor-arg name="event" ref="bonJoviConcert" />
+        <constructor-arg name="dateTime" ref="bonJoviConcertDate" />
+        <constructor-arg name="seat" value="3"/>
+    </bean>
+
 
 </beans>
