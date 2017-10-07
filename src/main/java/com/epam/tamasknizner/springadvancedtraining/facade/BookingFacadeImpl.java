@@ -22,14 +22,12 @@ public class BookingFacadeImpl implements BookingFacade {
     private final BookingService bookingService;
     private final EventService eventService;
     private final UserService userService;
-    private final TicketService ticketService;
 
     @Autowired
-    public BookingFacadeImpl(final BookingService bookingService, final EventService eventService, final UserService userService, final TicketService ticketService) {
+    public BookingFacadeImpl(final BookingService bookingService, final EventService eventService, final UserService userService) {
         this.bookingService = bookingService;
         this.eventService = eventService;
         this.userService = userService;
-        this.ticketService = ticketService;
     }
 
     @Override

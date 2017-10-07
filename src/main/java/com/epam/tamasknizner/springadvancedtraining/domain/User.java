@@ -7,7 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -28,6 +27,11 @@ public class User extends DomainObject {
 
     @JsonIgnore
     private Set<Ticket> tickets = new HashSet<>();
+
+    @JsonIgnore
+    private String password;
+
+    private String roles;
 
     public final Set<UserLuckyEventInfo> getLuckyEvents() {
         synchronized (luckyEventsLocker) {
@@ -82,52 +86,52 @@ public class User extends DomainObject {
         this.tickets = tickets;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(final String roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!luckyEvents.equals(user.luckyEvents)) return false;
+        if (!luckyEventsLocker.equals(user.luckyEventsLocker))
+            return false;
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (birthday != null ? !birthday.equals(user.birthday) : user.birthday != null) return false;
+        if (tickets != null ? !tickets.equals(user.tickets) : user.tickets != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        return roles != null ? roles.equals(user.roles) : user.roles == null;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email, birthday);
+        int result = luckyEvents.hashCode();
+        result = 31 * result + luckyEventsLocker.hashCode();
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (tickets != null ? tickets.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        return result;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        User other = (User) obj;
-        if (email == null) {
-            if (other.email != null) {
-                return false;
-            }
-        } else if (!email.equals(other.email)) {
-            return false;
-        }
-        if (firstName == null) {
-            if (other.firstName != null) {
-                return false;
-            }
-        } else if (!firstName.equals(other.firstName)) {
-            return false;
-        }
-        if (lastName == null) {
-            if (other.lastName != null) {
-                return false;
-            }
-        } else if (!lastName.equals(other.lastName)) {
-            return false;
-        }
-        if (birthday == null) {
-            if (other.birthday != null) {
-                return false;
-            }
-        } else if (!birthday.equals(other.birthday)) {
-            return false;
-        }
-        return true;
-    }
-
 }

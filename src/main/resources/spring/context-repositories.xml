@@ -11,6 +11,7 @@
                 <ref bean="johnDoe" />
                 <ref bean="steveSmith" />
                 <ref bean="anaJohnson" />
+                <ref bean="managerMax" />
             </util:list>
         </constructor-arg>
     </bean>
@@ -84,6 +85,8 @@
                 <constructor-arg name="dayOfMonth" value="5" />
             </bean>
         </property>
+        <property name="roles" value="ROLE_REGISTERED_USER"/>
+        <property name="password" value="$2a$11$xdzCyLPRQmdR9hljjOSucO/dFnnlVVJWLQ.E2UhdT3fB1d4ybY5QW"/>
     </bean>
     <bean id="steveSmith" class="com.epam.tamasknizner.springadvancedtraining.domain.User">
         <property name="id" value="51"/>
@@ -97,6 +100,8 @@
                 <constructor-arg name="dayOfMonth" value="2" />
             </bean>
         </property>
+        <property name="roles" value="ROLE_REGISTERED_USER"/>
+        <property name="password" value="$2a$11$xdzCyLPRQmdR9hljjOSucO/dFnnlVVJWLQ.E2UhdT3fB1d4ybY5QW"/>
     </bean>
     <bean id="anaJohnson" class="com.epam.tamasknizner.springadvancedtraining.domain.User">
         <property name="id" value="52"/>
@@ -110,6 +115,24 @@
                 <constructor-arg name="dayOfMonth" value="12" />
             </bean>
         </property>
+        <property name="roles" value="ROLE_REGISTERED_USER"/>
+        <property name="password" value="$2a$11$xdzCyLPRQmdR9hljjOSucO/dFnnlVVJWLQ.E2UhdT3fB1d4ybY5QW"/>
+    </bean>
+
+    <bean id="managerMax" class="com.epam.tamasknizner.springadvancedtraining.domain.User">
+        <property name="id" value="53"/>
+        <property name="firstName" value="Max" />
+        <property name="lastName" value="Manager" />
+        <property name="email" value="manager@mail.com" />
+        <property name="birthday">
+            <bean class="java.time.LocalDate">
+                <constructor-arg name="year" value="1973" />
+                <constructor-arg name="month" value="11" />
+                <constructor-arg name="dayOfMonth" value="12" />
+            </bean>
+        </property>
+        <property name="roles" value="ROLE_REGISTERED_USER,ROLE_BOOKING_MANAGER"/>
+        <property name="password" value="$2a$11$xdzCyLPRQmdR9hljjOSucO/dFnnlVVJWLQ.E2UhdT3fB1d4ybY5QW"/>
     </bean>
 
     <bean id="johnTicket" class="com.epam.tamasknizner.springadvancedtraining.domain.Ticket">

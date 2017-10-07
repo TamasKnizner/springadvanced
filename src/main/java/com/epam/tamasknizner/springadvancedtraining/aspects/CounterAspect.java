@@ -36,7 +36,9 @@ public class CounterAspect {
     @Before("execution(* com.epam.tamasknizner.springadvancedtraining.service.BookingService.getTicketsPrice(..))")
     public void handleGetTicketsPrice(JoinPoint joinPoint) {
         Event event = (Event)joinPoint.getArgs()[0];
-        incrementCounterForEvent(event, pricesQueried);
+        if(event != null) {
+            incrementCounterForEvent(event, pricesQueried);
+        }
     }
 
     private void submitUpdateTask(Event event) {
@@ -53,8 +55,10 @@ public class CounterAspect {
     }
 
     private void incrementCounterForEvent(Event event, ConcurrentHashMap<Event, Integer> map) {
-        map.compute(event, (key, value) -> value == null ? 1 : value + 1);
-        submitUpdateTask(event);
+        if(event != null) {
+            map.compute(event, (key, value) -> value == null ? 1 : value + 1);
+            submitUpdateTask(event);
+        }
     }
 
     public int getPricesQueriedTimes(Event event) {

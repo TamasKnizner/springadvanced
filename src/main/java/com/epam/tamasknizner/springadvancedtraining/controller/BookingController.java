@@ -38,7 +38,7 @@ public class BookingController {
         this.ticketViewTransformer = ticketViewTransformer;
     }
 
-    //Example query string: price?eventId=1&dateTime=1995-06-25T20:00Z&userId=1&seats=1
+    //Example query string: price?eventId=40&dateTime=1995-06-25T20:00Z&userId=50&seats=1
     @RequestMapping(value = GET_TICKET_PRICE_MAPPING, method = RequestMethod.GET)
     public String getTicketPrice(Model model, @RequestParam("eventId") Long eventId, @RequestParam("userId") Long userId,
             @RequestParam("dateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime, @RequestParam("seats") String seats) {
@@ -51,8 +51,8 @@ public class BookingController {
     {
     "tickets": [
         {
-            "eventId": "1",
-            "userId": "1",
+            "eventId": "40",
+            "userId": "50",
             "dateTime": "1995-06-25T20:00",
             "seat": "5"
         }
@@ -66,7 +66,7 @@ public class BookingController {
         return BOOKING_VIEW_NAME;
     }
 
-    //Example query string: ticketlist?eventId=1&dateTime=1995-06-25T20:00Z
+    //Example query string: ticketlist?eventId=40&dateTime=1995-06-25T20:00Z
     @RequestMapping(value = GET_TICKETS_FOR_EVENT_MAPPING, method = RequestMethod.GET)
     public String getTicketsForEvent(Model model, @RequestParam("eventId") Long eventId,
             @RequestParam("dateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime) {
@@ -74,7 +74,7 @@ public class BookingController {
         return TICKET_LIST_VIEW_NAME;
     }
 
-    //Example query string: ticketlistpdf?eventId=1&dateTime=1995-06-25T20:00Z&userId=1&seats=1
+    //Example query string: ticketlistpdf?eventId=40&dateTime=1995-06-25T20:00Z&userId=50&seats=1
     @RequestMapping(value = GET_TICKETS_FOR_EVENT_MAPPING_PDF, method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
     public ModelAndView getTicketsForEventPdf(@RequestParam("eventId") Long eventId,
             @RequestParam("dateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime) {

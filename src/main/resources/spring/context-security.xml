@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http>
+        <csrf disabled="true"/>
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/ticketlist" access="hasRole('ROLE_BOOKING_MANAGER')" />
+        <intercept-url pattern="/ticketlistpdf" access="hasRole('ROLE_BOOKING_MANAGER')" />
+        <intercept-url pattern="/**" access="hasRole('ROLE_REGISTERED_USER')" />
+        <form-login login-page="/login" username-parameter="email"/>
+        <remember-me key="myAppKey" token-validity-seconds="86400" remember-me-parameter="remember_me" remember-me-cookie="token"/>
+        <logout logout-success-url="/login" delete-cookies="JSESSIONID"/>
+    </http>
+    <authentication-manager>
+        <authentication-provider user-service-ref="defaultUserDetailsService">
+            <password-encoder ref="passwordEncoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11" />
+    </beans:bean>
+
+</beans:beans>
