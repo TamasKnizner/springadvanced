@@ -4,12 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-//@Controller
+@Controller
 public class ErrorController {
 
     private static final String ERROR_VIEW_NAME = "error";
 
-    //@ExceptionHandler(Exception.class)
+    @ExceptionHandler(Exception.class)
     public ModelAndView handleError(Exception ex) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("exception", ex.getMessage());

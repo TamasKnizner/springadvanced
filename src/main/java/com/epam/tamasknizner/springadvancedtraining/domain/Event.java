@@ -21,6 +21,9 @@ public class Event extends DomainObject {
     private String name;
 
     private double basePrice;
+
+    private double ticketPrice;
+
     @JsonDeserialize(using = EventRatingDeserializer.class)
     private EventRating rating;
 
@@ -30,13 +33,11 @@ public class Event extends DomainObject {
     /**
      * Checks if event is aired on particular <code>dateTime</code> and assigns
      * auditorium to it.
-     * 
-     * @param dateTime
-     *            Date and time of aired event for which to assign
-     * @param auditorium
-     *            Auditorium that should be assigned
+     *
+     * @param dateTime   Date and time of aired event for which to assign
+     * @param auditorium Auditorium that should be assigned
      * @return <code>true</code> if successful, <code>false</code> if event is
-     *         not aired on that date
+     * not aired on that date
      */
     public boolean assignAuditorium(LocalDateTime dateTime, Auditorium auditorium) {
         return auditoriums.put(dateTime, auditorium) != null;
@@ -44,11 +45,10 @@ public class Event extends DomainObject {
 
     /**
      * Removes auditorium assignment from event
-     * 
-     * @param dateTime
-     *            Date and time to remove auditorium for
+     *
+     * @param dateTime Date and time to remove auditorium for
      * @return <code>true</code> if successful, <code>false</code> if not
-     *         removed
+     * removed
      */
     public boolean removeAuditoriumAssignment(LocalDateTime dateTime) {
         return auditoriums.remove(dateTime) != null;
@@ -56,11 +56,10 @@ public class Event extends DomainObject {
 
     /**
      * Add date and time of event air
-     * 
-     * @param dateTime
-     *            Date and time to add
+     *
+     * @param dateTime Date and time to add
      * @return <code>true</code> if successful, <code>false</code> if already
-     *         there
+     * there
      */
     public boolean addAirDateTime(LocalDateTime dateTime) {
         return auditoriums.put(dateTime, new Auditorium()) != null;
@@ -68,13 +67,11 @@ public class Event extends DomainObject {
 
     /**
      * Adding date and time of event air and assigning auditorium to that
-     * 
-     * @param dateTime
-     *            Date and time to add
-     * @param auditorium
-     *            Auditorium to add if success in date time add
+     *
+     * @param dateTime   Date and time to add
+     * @param auditorium Auditorium to add if success in date time add
      * @return <code>true</code> if successful, <code>false</code> if already
-     *         there
+     * there
      */
     public boolean addAirDateTime(LocalDateTime dateTime, Auditorium auditorium) {
         return auditoriums.put(dateTime, auditorium) != null;
@@ -83,9 +80,8 @@ public class Event extends DomainObject {
     /**
      * Removes the date and time of event air. If auditorium was assigned to
      * that date and time - the assignment is also removed
-     * 
-     * @param dateTime
-     *            Date and time to remove
+     *
+     * @param dateTime Date and time to remove
      * @return <code>true</code> if successful, <code>false</code> if not there
      */
     public boolean removeAirDateTime(LocalDateTime dateTime) {
@@ -94,9 +90,8 @@ public class Event extends DomainObject {
 
     /**
      * Checks if event airs on particular date and time
-     * 
-     * @param dateTime
-     *            Date and time to check
+     *
+     * @param dateTime Date and time to check
      * @return <code>true</code> event airs on that date and time
      */
     public boolean airsOnDateTime(LocalDateTime dateTime) {
@@ -105,9 +100,8 @@ public class Event extends DomainObject {
 
     /**
      * Checks if event airs on particular date
-     * 
-     * @param date
-     *            Date to ckeck
+     *
+     * @param date Date to ckeck
      * @return <code>true</code> event airs on that date
      */
     public boolean airsOnDate(LocalDate date) {
@@ -117,11 +111,9 @@ public class Event extends DomainObject {
     /**
      * Checking if event airs on dates between <code>from</code> and
      * <code>to</code> inclusive
-     * 
-     * @param from
-     *            Start date to check
-     * @param to
-     *            End date to check
+     *
+     * @param from Start date to check
+     * @param to   End date to check
      * @return <code>true</code> event airs on dates
      */
     public boolean airsOnDates(LocalDate from, LocalDate to) {
@@ -164,31 +156,35 @@ public class Event extends DomainObject {
         this.auditoriums = auditoriums;
     }
 
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(final double ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        return Double.compare(event.basePrice, basePrice) == 0 && Double.compare(event.ticketPrice, ticketPrice) == 0 &&
+                (name != null ? name.equals(event.name) : event.name == null) && rating == event.rating;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        int result;
+        long temp;
+        result = name != null ? name.hashCode() : 0;
+        temp = Double.doubleToLongBits(basePrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(ticketPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (rating != null ? rating.hashCode() : 0);
+        return result;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Event other = (Event) obj;
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
-            return false;
-        }
-        return true;
-    }
-
 }

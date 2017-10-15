@@ -23,23 +23,30 @@ import java.util.Set;
 @Controller
 public class MultipartController {
 
+    private static final String UPLOAD_MESSAGE = "uploadMessage";
+    private static final String UPLOAD_MESSAGE_SUCCESS = "Upload Success!";
+    private static final String UPLOAD_MESSAGE_FAILURE = "Upload Failure!";
     private static final String UPLOAD_VIEW = "upload";
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final EventService eventService;
 
     @Autowired
-    private EventService eventService;
+    public MultipartController(final UserService userService, final EventService eventService) {
+        this.userService = userService;
+        this.eventService = eventService;
+    }
 
     @RequestMapping(value = "/uploadEvents", method = RequestMethod.POST)
     public String uploadEvents(@RequestParam("file") MultipartFile multipartFile, Model model) throws IOException {
         if (!multipartFile.isEmpty()) {
+            // Note for myself:  move these to a service
             ObjectMapper objectMapper = new ObjectMapper();
             Set<Event> events = objectMapper.readValue(multipartFile.getInputStream(), new TypeReference<Set<Event>>(){});
             events.forEach(eventService::save);
-            model.addAttribute("uploadMessage", "Upload Success!");
+            addSuccessView(model);
         } else {
-            model.addAttribute("uploadMessage", "Upload Failure!");
+            addFailureView(model);
         }
         return UPLOAD_VIEW;
     }
@@ -47,19 +54,29 @@ public class MultipartController {
     @RequestMapping(value = "/uploadUsers", method = RequestMethod.POST)
     public String uploadUsers(@RequestParam("file") MultipartFile multipartFile, Model model) throws IOException {
         if (!multipartFile.isEmpty()) {
+            // Note for myself:  move these to a service
             ObjectMapper objectMapper = new ObjectMapper();
             Set<User> users = objectMapper.readValue(multipartFile.getInputStream(), new TypeReference<Set<User>>(){});
             users.forEach(userService::save);
-            model.addAttribute("uploadMessage", "Upload Success!");
+            addSuccessView(model);
         } else {
-            model.addAttribute("uploadMessage", "Upload Failure!");
+            addFailureView(model);
         }
         return UPLOAD_VIEW;
     }
 
+
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String upload() {
         return UPLOAD_VIEW;
+    }
+
+    private void addSuccessView(final Model model) {
+        model.addAttribute(UPLOAD_MESSAGE, UPLOAD_MESSAGE_SUCCESS);
+    }
+
+    private void addFailureView(final Model model) {
+        model.addAttribute(UPLOAD_MESSAGE, UPLOAD_MESSAGE_FAILURE);
     }
 
 }

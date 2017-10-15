@@ -31,6 +31,9 @@ public class User extends DomainObject {
     @JsonIgnore
     private String password;
 
+    @JsonIgnore
+    private UserAccount userAccount;
+
     private String roles;
 
     public final Set<UserLuckyEventInfo> getLuckyEvents() {
@@ -102,6 +105,14 @@ public class User extends DomainObject {
         this.roles = roles;
     }
 
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(final UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -118,6 +129,7 @@ public class User extends DomainObject {
         if (birthday != null ? !birthday.equals(user.birthday) : user.birthday != null) return false;
         if (tickets != null ? !tickets.equals(user.tickets) : user.tickets != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (userAccount != null ? !userAccount.equals(user.userAccount) : user.userAccount != null) return false;
         return roles != null ? roles.equals(user.roles) : user.roles == null;
     }
 
@@ -131,6 +143,7 @@ public class User extends DomainObject {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (tickets != null ? tickets.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (userAccount != null ? userAccount.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
         return result;
     }

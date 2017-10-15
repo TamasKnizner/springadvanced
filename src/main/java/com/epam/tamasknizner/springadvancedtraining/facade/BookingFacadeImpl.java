@@ -5,7 +5,6 @@ import com.epam.tamasknizner.springadvancedtraining.domain.Ticket;
 import com.epam.tamasknizner.springadvancedtraining.domain.User;
 import com.epam.tamasknizner.springadvancedtraining.service.BookingService;
 import com.epam.tamasknizner.springadvancedtraining.service.EventService;
-import com.epam.tamasknizner.springadvancedtraining.service.TicketService;
 import com.epam.tamasknizner.springadvancedtraining.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
