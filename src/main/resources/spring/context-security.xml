@@ -11,7 +11,7 @@
         <intercept-url pattern="/ticketlist" access="hasRole('ROLE_BOOKING_MANAGER')" />
         <intercept-url pattern="/ticketlistpdf" access="hasRole('ROLE_BOOKING_MANAGER')" />
         <intercept-url pattern="/**" access="hasRole('ROLE_REGISTERED_USER')" />
-        <form-login login-page="/login" username-parameter="email"/>
+        <form-login login-page="/login" username-parameter="email" authentication-failure-forward-url="/loginfailed"/>
         <remember-me key="myAppKey" token-validity-seconds="86400" remember-me-parameter="remember_me" remember-me-cookie="token"/>
         <logout logout-success-url="/login" delete-cookies="JSESSIONID"/>
     </http>

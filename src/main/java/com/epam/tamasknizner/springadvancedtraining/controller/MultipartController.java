@@ -23,6 +23,10 @@ import java.util.Set;
 @Controller
 public class MultipartController {
 
+    private static final String UPLOAD_EVENTS_REQUEST_MAPPING = "/uploadEvents";
+    private static final String UPLOAD_USERS_REQUEST_MAPPING = "/uploadUsers";
+    private static final String UPLOAD_PAGE_REQUEST_MAPPING = "/upload";
+
     private static final String UPLOAD_MESSAGE = "uploadMessage";
     private static final String UPLOAD_MESSAGE_SUCCESS = "Upload Success!";
     private static final String UPLOAD_MESSAGE_FAILURE = "Upload Failure!";
@@ -37,7 +41,7 @@ public class MultipartController {
         this.eventService = eventService;
     }
 
-    @RequestMapping(value = "/uploadEvents", method = RequestMethod.POST)
+    @RequestMapping(value = UPLOAD_EVENTS_REQUEST_MAPPING, method = RequestMethod.POST)
     public String uploadEvents(@RequestParam("file") MultipartFile multipartFile, Model model) throws IOException {
         if (!multipartFile.isEmpty()) {
             // Note for myself:  move these to a service
@@ -51,7 +55,7 @@ public class MultipartController {
         return UPLOAD_VIEW;
     }
 
-    @RequestMapping(value = "/uploadUsers", method = RequestMethod.POST)
+    @RequestMapping(value = UPLOAD_USERS_REQUEST_MAPPING, method = RequestMethod.POST)
     public String uploadUsers(@RequestParam("file") MultipartFile multipartFile, Model model) throws IOException {
         if (!multipartFile.isEmpty()) {
             // Note for myself:  move these to a service
@@ -66,7 +70,7 @@ public class MultipartController {
     }
 
 
-    @RequestMapping(value = "/upload", method = RequestMethod.GET)
+    @RequestMapping(value = UPLOAD_PAGE_REQUEST_MAPPING, method = RequestMethod.GET)
     public String upload() {
         return UPLOAD_VIEW;
     }

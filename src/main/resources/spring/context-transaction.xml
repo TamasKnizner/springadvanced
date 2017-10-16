@@ -4,14 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- transactionManager bean is set by default-->
-    <tx:annotation-driven />
+    <tx:annotation-driven transaction-manager="txManager"/>
 
     <!-- I picked this PlatformTransactionManager implementation because according to the javadoc it is for cases without a relational database. -->
-    <bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+    <bean id="txManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
 
     <bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
-        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionManager" ref="txManager" />
     </bean>
 
     <bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">

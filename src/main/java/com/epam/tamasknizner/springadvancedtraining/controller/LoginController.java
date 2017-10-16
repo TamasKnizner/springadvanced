@@ -4,6 +4,7 @@ import com.epam.tamasknizner.springadvancedtraining.domain.request.LoginRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,5 +26,11 @@ public class LoginController {
     public String doLogin(@ModelAttribute LoginRequest loginRequest) {
         LOGGER.info("{}", loginRequest);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
+    public String loginFailed(Model model) {
+        model.addAttribute("error", "Wrong username or password!");
+        return "redirect:/login";
     }
 }
