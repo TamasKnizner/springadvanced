@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,28 +17,42 @@ import java.util.Set;
 /**
  * @author Yuriy_Tkach
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="user")
 public class User extends DomainObject {
 
+    @XmlTransient
     private final Set<UserLuckyEventInfo> luckyEvents = new HashSet<>();
+
+    @XmlTransient
     private final Object luckyEventsLocker = new Object();
 
+    @XmlElement(name="firstName")
     private String firstName;
 
+    @XmlElement(name="lastName")
     private String lastName;
 
+    @XmlElement(name="email")
     private String email;
+
     @JsonDeserialize(using = LocalDateDeserializer.class)
+    @XmlElement(name="birthday")
     private LocalDate birthday;
 
     @JsonIgnore
+    @XmlTransient
     private Set<Ticket> tickets = new HashSet<>();
 
     @JsonIgnore
+    @XmlTransient
     private String password;
 
     @JsonIgnore
+    @XmlElement(name="userAccount")
     private UserAccount userAccount;
 
+    @XmlElement(name="roles")
     private String roles;
 
     public final Set<UserLuckyEventInfo> getLuckyEvents() {
