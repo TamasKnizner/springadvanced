@@ -4,6 +4,11 @@ import com.epam.tamasknizner.springadvancedtraining.domain.request.deserializer.
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -16,18 +21,25 @@ import java.util.TreeSet;
 /**
  * @author Yuriy_Tkach
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="event")
 public class Event extends DomainObject {
 
+    @XmlElement(name="name")
     private String name;
 
+    @XmlElement(name="basePrice")
     private double basePrice;
 
+    @XmlElement(name="ticketPrice")
     private double ticketPrice;
 
     @JsonDeserialize(using = EventRatingDeserializer.class)
+    @XmlElement(name="rating")
     private EventRating rating;
 
     @JsonIgnore
+    @XmlTransient
     private Map<LocalDateTime, Auditorium> auditoriums = new HashMap<>();
 
     /**
