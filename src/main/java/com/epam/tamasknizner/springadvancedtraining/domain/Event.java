@@ -18,9 +18,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- * @author Yuriy_Tkach
- */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="event")
 public class Event extends DomainObject {

@@ -1,15 +1,10 @@
 package com.epam.tamasknizner.springadvancedtraining.domain;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *  An entity that should store the amount of prepaid money user has in the system, which should be used during booking procedure.
- */
 @XmlRootElement(name="userAccount")
 public class UserAccount extends DomainObject {
 
-    @XmlElement(name="prepaidAmount")
     private double prepaidAmount;
 
     public UserAccount() {

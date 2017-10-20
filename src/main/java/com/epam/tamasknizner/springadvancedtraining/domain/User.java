@@ -1,6 +1,7 @@
 package com.epam.tamasknizner.springadvancedtraining.domain;
 
 import com.epam.tamasknizner.springadvancedtraining.domain.request.deserializer.LocalDateDeserializer;
+import com.epam.tamasknizner.springadvancedtraining.xmladapter.LocalDateAdapter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,13 +11,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author Yuriy_Tkach
- */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="user")
 public class User extends DomainObject {
@@ -27,17 +26,14 @@ public class User extends DomainObject {
     @XmlTransient
     private final Object luckyEventsLocker = new Object();
 
-    @XmlElement(name="firstName")
     private String firstName;
 
-    @XmlElement(name="lastName")
     private String lastName;
 
-    @XmlElement(name="email")
     private String email;
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    @XmlElement(name="birthday")
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate birthday;
 
     @JsonIgnore
@@ -49,10 +45,8 @@ public class User extends DomainObject {
     private String password;
 
     @JsonIgnore
-    @XmlElement(name="userAccount")
     private UserAccount userAccount;
 
-    @XmlElement(name="roles")
     private String roles;
 
     public final Set<UserLuckyEventInfo> getLuckyEvents() {
