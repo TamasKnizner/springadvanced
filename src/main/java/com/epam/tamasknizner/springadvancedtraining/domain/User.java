@@ -1,8 +1,10 @@
 package com.epam.tamasknizner.springadvancedtraining.domain;
 
 import com.epam.tamasknizner.springadvancedtraining.domain.request.deserializer.LocalDateDeserializer;
+import com.epam.tamasknizner.springadvancedtraining.domain.request.serializer.LocalDateSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -14,7 +16,9 @@ import java.util.Set;
  */
 public class User extends DomainObject {
 
+    @JsonIgnore
     private final Set<UserLuckyEventInfo> luckyEvents = new HashSet<>();
+    @JsonIgnore
     private final Object luckyEventsLocker = new Object();
 
     private String firstName;
@@ -23,6 +27,7 @@ public class User extends DomainObject {
 
     private String email;
     @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate birthday;
 
     @JsonIgnore
@@ -146,5 +151,16 @@ public class User extends DomainObject {
         result = 31 * result + (userAccount != null ? userAccount.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", roles='" + roles + '\'' +
+                '}';
     }
 }

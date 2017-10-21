@@ -1,8 +1,10 @@
 package com.epam.tamasknizner.springadvancedtraining.domain;
 
 import com.epam.tamasknizner.springadvancedtraining.domain.request.deserializer.EventRatingDeserializer;
+import com.epam.tamasknizner.springadvancedtraining.domain.request.serializer.AirDatesSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -128,6 +130,7 @@ public class Event extends DomainObject {
         this.name = name;
     }
 
+    @JsonSerialize(using = AirDatesSerializer.class)
     public TreeSet<LocalDateTime> getAirDates() {
         return new TreeSet<>(auditoriums.keySet());
     }

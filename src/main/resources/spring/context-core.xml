@@ -9,7 +9,12 @@
 
     <context:annotation-config />
     <context:component-scan base-package="com.epam.tamasknizner" />
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="false">
+            <bean class="com.epam.tamasknizner.springadvancedtraining.rest.messageconverter.TicketMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!--<bean class="org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver" p:order="1" />-->
     <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" p:order="2" p:defaultErrorView="error">-->
