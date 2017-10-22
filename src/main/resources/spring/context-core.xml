@@ -16,13 +16,13 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!--<bean class="org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver" p:order="1" />-->
-    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" p:order="2" p:defaultErrorView="error">-->
-        <!--<property name="exceptionMappings">-->
-            <!--<props>-->
-                <!--<prop key="java.lang.Exception">error</prop>-->
-            <!--</props>-->
-        <!--</property>-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver" p:order="1" />
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" p:order="2" p:defaultErrorView="error">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">error</prop>
+            </props>
+        </property>
+    </bean>
 
 </beans>

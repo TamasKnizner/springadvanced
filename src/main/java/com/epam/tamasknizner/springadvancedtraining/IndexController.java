@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final EventService eventService;
 
     @Autowired
-    private EventService eventService;
+    public IndexController(final UserService userService, final EventService eventService) {
+        this.userService = userService;
+        this.eventService = eventService;
+    }
 
     @RequestMapping("/")
     public String index(final Model model) {

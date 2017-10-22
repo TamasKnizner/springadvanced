@@ -86,7 +86,7 @@
             </bean>
         </property>
         <property name="roles" value="ROLE_REGISTERED_USER"/>
-        <property name="password" value="$2a$11$xdzCyLPRQmdR9hljjOSucO/dFnnlVVJWLQ.E2UhdT3fB1d4ybY5QW"/>
+        <property name="password" value="$2a$11$T3C.P.yLr3nwsqv.4XFNge1MazCcJVhI3x9Rh8ka.ZIp323i3qZCC"/>
         <property name="userAccount">
             <bean class="com.epam.tamasknizner.springadvancedtraining.domain.UserAccount">
                 <constructor-arg name="prepaidAmount" value="1000" />
@@ -106,7 +106,7 @@
             </bean>
         </property>
         <property name="roles" value="ROLE_REGISTERED_USER"/>
-        <property name="password" value="$2a$11$xdzCyLPRQmdR9hljjOSucO/dFnnlVVJWLQ.E2UhdT3fB1d4ybY5QW"/>
+        <property name="password" value="$2a$11$T3C.P.yLr3nwsqv.4XFNge1MazCcJVhI3x9Rh8ka.ZIp323i3qZCC"/>
         <property name="userAccount">
             <bean class="com.epam.tamasknizner.springadvancedtraining.domain.UserAccount">
                 <constructor-arg name="prepaidAmount" value="0" />
@@ -126,7 +126,7 @@
             </bean>
         </property>
         <property name="roles" value="ROLE_REGISTERED_USER"/>
-        <property name="password" value="$2a$11$xdzCyLPRQmdR9hljjOSucO/dFnnlVVJWLQ.E2UhdT3fB1d4ybY5QW"/>
+        <property name="password" value="$2a$11$T3C.P.yLr3nwsqv.4XFNge1MazCcJVhI3x9Rh8ka.ZIp323i3qZCC"/>
         <property name="userAccount">
             <bean class="com.epam.tamasknizner.springadvancedtraining.domain.UserAccount">
                 <constructor-arg name="prepaidAmount" value="100000" />
@@ -147,7 +147,6 @@
             </bean>
         </property>
         <property name="roles" value="ROLE_REGISTERED_USER,ROLE_BOOKING_MANAGER"/>
-        <!-- the password is "password" -->
         <property name="password" value="$2a$11$T3C.P.yLr3nwsqv.4XFNge1MazCcJVhI3x9Rh8ka.ZIp323i3qZCC"/>
         <property name="userAccount">
             <bean class="com.epam.tamasknizner.springadvancedtraining.domain.UserAccount">

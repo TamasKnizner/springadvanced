@@ -12,6 +12,9 @@
   <h1>Welcome</h1>
   This is the welcome page, please look at BookingController to see the example requests.<br>
   Please run with mvn tomcat7:run!
+  <h2>Rest services</h2>
+  The rest related classes can be found in the com.epam.tamasknizner.springadvancedtraining.rest package.<br>
+  The passwords are "password" for every user. Users can be found in context-repositories.xml file.
   <hr>
   <a href="<@spring.url '/logout'/>">Logout</a>
 </div>
