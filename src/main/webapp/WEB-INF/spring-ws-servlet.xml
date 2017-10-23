@@ -7,30 +7,11 @@
        http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-  <sws:annotation-driven />
   <context:component-scan base-package="com.epam.tamasknizner.springadvancedtraining.soap.service" />
   <context:annotation-config />
-
-  <sws:static-wsdl id="schema" location="/WEB-INF/wsdl/schema1.wsdl"/>
-
-
-  <bean class="org.springframework.ws.transport.http.WebServiceMessageReceiverHandlerAdapter"/>
-
-  <bean class="org.springframework.ws.transport.http.WsdlDefinitionHandlerAdapter"/>
-
-  <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-    <property name="mappings">
-      <props>
-        <prop key="*.wsdl">myServiceDefinition</prop>
-      </props>
-    </property>
-    <property name="defaultHandler" ref="messageDispatcher"/>
-  </bean>
-
-  <bean id="messageDispatcher" class="org.springframework.ws.soap.server.SoapMessageDispatcher"/>
-
-  <bean id="myServiceDefinition" class="org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition">
-    <property name="wsdl" value="/WEB-INF/myServiceDefintion.wsdl"/>
-  </bean>
+  <sws:annotation-driven />
+  <sws:dynamic-wsdl id="users" targetNamespace="http://localhost:8080/springadvancedtraining" portTypeName="UsersPort" locationUri="/ws">
+    <sws:xsd location="classpath:/wsdl/schema1.xsd"/>
+  </sws:dynamic-wsdl>
 
 </beans>

@@ -12,6 +12,9 @@
   <h1>Welcome</h1>
   This is the welcome page, please look at BookingController to see the example requests.<br>
   Please run with mvn tomcat7:run!
+  <h2>SOAP</h2>
+  <p>Unfortunately I wasn't able to make it work, but added a lots of code, including the generated class files, the webservice config (both java and xml), endpoint and generated xsd file.
+    They can be found in the com.epam.tamasknizner.springadvancedtraining.soap package.</p>
   <hr>
   <a href="<@spring.url '/logout'/>">Logout</a>
 </div>
